@@ -1,198 +1,113 @@
 public class Main
 {
-    static int lastOccurance(String s,char c)
-    {
-        if(s.charAt(0)==c&&s.length()==1)
-        {
-            return  0;
-        }
-        if(s.length()>=2&&s.charAt(0)==c&&s.charAt(1)!=c)
-        {
-            return 0;
-        }
-        else
-        {
-            return 1+lastOccurance(s.substring(1),c);
-        }
-    }
-    static int[] moveZeroesToEnd(int arr[])
+     static int forward(int arr[][],int i,int j,int c)
     {
         int count=0;
-        int arr1[]= new int[arr.length];
-        for(int i=0;i<arr.length;i++)
+
+        while(j<c)
         {
-            if(arr[i]!=0)
-            {
-                arr1[count]=arr[i];
-                count++;
-            }
+            //System.out.print(arr[i][j]+" ");
+            System.out.print(arr[i][j]+" ");
+            j++;count++;
         }
-        return arr1;
+        System.out.println();
+        return count;
     }
-    static int[] intersection(int arr1[],int arr2[])
-    {
-        ArrayList<Integer> al= new ArrayList<>();
-
-            Arrays.sort(arr1);
-            int f=0,l=arr1.length-1,m=0;
-            for(int i=0;i<arr2.length;i++)
-            {
-                f=0;l=arr1.length-1;
-                while(f<=l)
-                {
-                    m=(f+l)/2;
-                    if(arr2[i]>arr1[m]){f=m+1;}
-                    if(arr2[i]<arr1[m]){l=m-1;}
-                    if(arr2[i]==arr1[m]){
-                        if(!al.contains(arr2[i]))
-                        {al.add(arr2[i]);}
-                        break;
-                    }
-                }
-            }
-       int arr[] =new int[al.size()];
-            for(int i=0;i<al.size();i++)
-            {
-
-                arr[i]=al.get(i);
-            }
-            return arr;
-    }
-    static char findDifference(String s1,String s2)
-    {
-        HashMap<Character,Integer> hmap= new HashMap<>();
-        for(char c : s1.toCharArray())
+    static int down(int arr[][],int i,int j,int r){
+        int c=0;
+        while(i<r)
         {
-            if(hmap.containsKey(c))
-            {
-                hmap.put(c,hmap.get(c)+1);
-            }
-            else
-            {
-                hmap.put(c,1);
-            }
+            //System.out.print(i+""+j);
+            System.out.print(arr[i][j]+" ");
+            i++;c++;
         }
-        for(char c:s2.toCharArray())
+        System.out.println();
+        return c;
+
+    }
+    static int reverse(int arr[][],int i,int j,int c){
+        int count=0;
+        while(j>c)
         {
-            if(!hmap.containsKey(c))
-                return c;
-            else
-            {
-                if(hmap.get(c)-1==0)
-                {
-                    hmap.remove(c);
-                }
-                else
-                hmap.put(c,hmap.get(c)-1);
-
-            }
+            //System.out.print(arr[i][j]+" ");
+            System.out.print(arr[i][j]+" ");
+            j--;count++;
         }
-        return ' ';
+        System.out.println();
+        return count;
     }
- static String sortingTheSentence(String s)
- {
-     SortedMap<Integer,String> sortedMap = new TreeMap<>();
-     String key="";
-     String value="";
-    for(int i=0;i<s.length();i++)
+    static int up(int arr[][],int i,int j,int r){
+        int c=0;
+        //System.out.println("i="+i+"j="+j);
+        while(i>r)
+        {
+            //System.out.print(arr[i][j]+" ");
+            System.out.print(arr[i][j]+" ");
+            i--;c++;
+        }
+        System.out.println();
+        return c;
+    }
+    static int downwards(int arr[][],int i,int j,int c)
     {
-
-        if((s.charAt(i)-97>=0&&s.charAt(i)-97<=25)||(s.charAt(i)-65>=0&&s.charAt(i)-65<=25)){value=value+s.charAt(i);}
-        else
-            if(s.charAt(i)==' '){
-                if(!sortedMap.containsKey(Integer.parseInt(key)))
-                sortedMap.put(Integer.parseInt(key),value);
-                key="";value="";
-            }
-            else
-            {key=key+s.charAt(i);}
-            if(i==s.length()-1)
-            {
-                if(!sortedMap.containsKey(Integer.parseInt(key)))
-                    sortedMap.put(Integer.parseInt(key),value);
-
-            }
-
-
+        while(i<c)
+        {
+            System.out.print(arr[i][j]+" ");
+            i++;
+        }
+        System.out.println();
+        return i-1;
     }
-    String ans="";
-    for(int i :sortedMap.keySet())
+    static int upwards(int arr[][],int i,int j)
     {
-        ans=ans+sortedMap.get(i)+" ";
+        while(i>=0)
+        {
+            System.out.print(arr[i][j]+" ");i--;
+        }
+        System.out.println();
+        return i+1;
     }
-     //System.out.println(ans);
-    return  ans;
- }
- static int[] sort0s1s2s(int arr[])
- {
-     int f=0,l=arr.length-1,m=0;
-     int temp=0;
-     while(m<=l)
-     {
-         if(arr[m]==1){m++;}
-         else
-         if(arr[m]==0){
-             temp=arr[m];
-             arr[m]=arr[f];
-             arr[f]=temp;f++;m++;
-         }
-         else
-         if(arr[m]==2){
-             temp=arr[m];
-             arr[m]=arr[l];
-             arr[l]=temp;l--;
-         }
 
-     }
-     return arr;
- }
+
+   
     public static void main(String[] args) {
-     sortingTheSentence("Myself2 Me1 I4 and3");
-        System.out.println(findDifference("abcd","abecd"));
-        for(int i:intersection(new int[]{4,9,5},new int[]{9,4,9,8,4}))
-        {
-            System.out.print(i+" ");
-        }
-        System.out.println();
-        for(int i : moveZeroesToEnd(new int[]{1,0,1,0,1,1,0}))
-        {
-            System.out.print(i+" ");
-        }
-        System.out.println();
-        for(int i : sort0s1s2s(new int[]{1,0,2,0,1,2,0,0}))
-        {
-            System.out.print(i+" ");
-        }
-        System.out.println();
-        System.out.println(lastOccurance("abccc",'c'));
-      Scanner sc = new Scanner(System.in);
-      int s=sc.nextInt();
-      int arr[]= new int[s];
+    int [][]arr=new int[][]{{1,2,3,4,5,6},
+                {5,6,7,8,8,7},{9,10,11,12,6,7},{13,14,15,16,8,7},{9,10,11,12,6,7},
+                {13,14,15,16,8,7}};
+        int count=0;
+        int i=0,j=0,c=6,t=0;
 
-      for(int i=0;i<s;i++)
-      {
-          arr[i]=sc.nextInt();
+// Wave
+        while(count<25)
+        {
+            i=downwards(arr,i,j,5);
+            j++;
+            i=upwards(arr,i,j);
+            j++;
+            count+=2*5;
 
-      }
-   int f=0,l=arr.length-1,m=0,temp;
-      while(m<=l)
-      {
-          if(arr[m]!=0&&arr[l]==0){f++;m++;l--;}
-          if(arr[m]!=0&&arr[l]!=0){temp=arr[f];arr[f]=arr[m];
-          arr[m]=temp;f++;m++;}
-          if(arr[m]==0&&arr[l]!=0){temp=arr[l];
-          arr[l]=arr[m];arr[m]=temp;;m++;l--;}
-          if(arr[m]==0&&arr[l]==0){m++;l--;}
-          for(int x:arr)
-          {
-              System.out.print(x+" ");
-          }
-          System.out.println();
-      }
-for(int x:arr)
-{
-    System.out.print(x+" ");
-}
+        }
+        count=0;
+        i=4;j=0;
+        //Reverse Wave
+        System.out.println();
+        while(count<25)
+        {
+
+            i=upwards(arr,i,j);
+            j++;
+            i=downwards(arr,i,j,5);
+            j++;
+            count+=2*5;
+
+        }
+
+
+
+
+
+
+
 
 
     }
