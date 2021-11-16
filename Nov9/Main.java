@@ -47,7 +47,7 @@ public class Main
     System.out.print(x+" "); 
    }
    // sort 0 1 and 2
- }
+ 
   
    for(int x:sort0s1s2s(new int[]{1,0,2,0,1,0,2,2,0}))
    {
