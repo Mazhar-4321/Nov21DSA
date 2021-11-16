@@ -115,7 +115,7 @@ public class Main
         // Minimum In An Array
         System.out.println(minimumInAnArray(new int[]{1,5,0,9}));
         // Remove All duplicates from String
-         System.out.println(removeAllDuplicates("aabbccdd,0));
+         System.out.println(removeAllDuplicates("aabbccdd",0));
         
     }
 
